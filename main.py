@@ -10,13 +10,20 @@ run = True
 def performMath():
     global run
     global previous
-    equation = input("Please enter equation: ")
+    equation = ""
+    if previous == 0:
+        equation = input("Please enter equation: ")
+    else:
+        equation = input(str(previous))
+
     if equation == "quit":
         run = False
     else:
         equation = re.sub('[a-zA-Z,.?!@#$&_=" "]', '', equation)
-        previous = eval(equation)
-        print("You typed: ", previous)
+        if previous == 0:
+            previous = eval(equation) # type becomes an int
+        else:
+            previous = eval(str(previous) + equation) # have to convert int to str to concat
 
 
 while run:
